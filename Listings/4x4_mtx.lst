@@ -1,0 +1,69 @@
+C51 COMPILER V9.60.0.0   4X4_MTX                                                           12/16/2020 14:33:56 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE 4X4_MTX
+OBJECT MODULE PLACED IN .\Objects\4x4_mtx.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 4x4_mtx.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\4
+                    -x4_mtx.lst) TABS(2) OBJECT(.\Objects\4x4_mtx.obj)
+
+line level    source
+
+   1          #include <REG51.h>
+   2          #include "header.h"
+   3          
+   4          #define keypad P1
+   5          
+   6          u8 GetKey()
+   7          {
+   8   1        keypad=0xFF;
+   9   1        while(1)
+  10   1        {
+  11   2          keypad=0xFE;
+  12   2          if(keypad==0xEE)
+  13   2            return '1';
+  14   2          if(keypad==0xDE)
+  15   2            return '2';
+  16   2          if(keypad==0xBE)
+  17   2            return '3';
+  18   2          
+  19   2          keypad=0xFD;
+  20   2          if(keypad==0xED)
+  21   2            return '4';
+  22   2          if(keypad==0xDD)
+  23   2            return '5';
+  24   2          if(keypad==0xBD)
+  25   2            return '6';
+  26   2            
+  27   2          keypad=0xFB;
+  28   2          if(keypad==0xEB)
+  29   2            return '7';
+  30   2          if(keypad==0xDB)
+  31   2            return '8';
+  32   2          if(keypad==0xBB)
+  33   2            return '9';
+  34   2                    
+  35   2          keypad=0xF7;
+  36   2          if(keypad==0xE7)
+  37   2            return '*';
+  38   2          if(keypad==0xD7)
+  39   2            return '0';
+  40   2          if(keypad==0xB7)
+  41   2            return '#';
+  42   2        }
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    138    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.60.0.0   4X4_MTX                                                           12/16/2020 14:33:56 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

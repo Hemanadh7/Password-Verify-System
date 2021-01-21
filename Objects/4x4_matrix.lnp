@@ -1,0 +1,8 @@
+".\Objects\lcd_driver.obj",
+".\Objects\main.obj",
+".\Objects\4x4_mtx.obj",
+".\Objects\at24c512_driver.obj",
+".\Objects\i2c_driver.obj",
+".\Objects\ext_interrupt.obj" 
+TO ".\Objects\4x4_matrix" 
+PRINT(".\Listings\4x4_matrix.m51")

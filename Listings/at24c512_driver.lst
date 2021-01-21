@@ -1,0 +1,59 @@
+C51 COMPILER V9.60.0.0   AT24C512_DRIVER                                                   12/16/2020 14:33:56 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE AT24C512_DRIVER
+OBJECT MODULE PLACED IN .\Objects\at24c512_driver.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE C:\Keil_v5\C51\Examples\at24c512_driver.c OPTIMIZE(8,SPEED) BROWSE DEBUG
+                    - OBJECTEXTEND PRINT(.\Listings\at24c512_driver.lst) TABS(2) OBJECT(.\Objects\at24c512_driver.obj)
+
+line level    source
+
+   1          #include "header.h"
+   2          
+   3          void eeprom_byte_write(u8 ha, u8 la, u8 d)
+   4          {
+   5   1        i2c_start();
+   6   1        i2c_write(0xA0);
+   7   1        i2c_ack();
+   8   1        i2c_write(ha);
+   9   1        i2c_ack();
+  10   1        i2c_write(la);
+  11   1        i2c_ack();
+  12   1        i2c_write(d);
+  13   1        i2c_ack();
+  14   1        i2c_stop();
+  15   1        delay_ms(10);
+  16   1      }
+  17          
+  18          u8 eeprom_byte_read(u8 ha, u8 la)
+  19          {
+  20   1        u8 temp;
+  21   1        i2c_start();
+  22   1        i2c_write(0xA0);
+  23   1        i2c_ack();
+  24   1        i2c_write(ha);
+  25   1        i2c_ack();
+  26   1        i2c_write(la);
+  27   1        i2c_ack();
+  28   1        i2c_start();
+  29   1        i2c_write(0xA1);
+  30   1        i2c_ack();
+  31   1        temp=i2c_read();
+  32   1        i2c_noack();
+  33   1        i2c_stop();
+  34   1        return temp;
+  35   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    107    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

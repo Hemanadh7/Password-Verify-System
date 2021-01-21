@@ -1,0 +1,78 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              12/16/2020 14:33:55 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REG51.h>
+   2          #include "header.h"
+   3          
+   4          #define keypad P1
+   5          
+   6          void main()
+   7          {
+   8   1        u8 key1,key2,i=0,j=0;
+   9   1        s8 usrPass[5], pass[5];
+  10   1        usrPass[4]=0;
+  11   1        pass[4]=0;
+  12   1        lcd_init();
+  13   1        lcd_cmd(0x80);
+  14   1        en_ext_interrupt();
+  15   1        while(1)
+  16   1        {
+  17   2          for(i=0;i<4;i++)
+  18   2          {
+  19   3            pass[i]=eeprom_byte_read(0,i);
+  20   3          }
+  21   2          i=0;
+  22   2          delay_ms(50);
+  23   2          lcd_string("Enter password:");
+  24   2          lcd_cmd(0xC0);
+  25   2          while(i<4)
+  26   2          {
+  27   3            key1=GetKey();
+  28   3            delay_ms(30);
+  29   3            key2=GetKey();
+  30   3            if(key1==key2 && i<4)
+  31   3            {
+  32   4              lcd_data(key1);
+  33   4              usrPass[i]=key1;
+  34   4              i++;
+  35   4            }
+  36   3          }
+  37   2          i=0;
+  38   2          delay_ms(50);
+  39   2          while(i<4)
+  40   2          {
+  41   3            if(pass[i]!=usrPass[i])
+  42   3            {
+  43   4              lcd_cmd(0x1);
+  44   4              lcd_cmd(0x80);
+  45   4              lcd_string("Invalid pwd.");
+  46   4              return;
+  47   4            }
+  48   3            i++;
+  49   3          }
+  50   2          delay_ms(100);
+  51   2        }
+  52   1      }
+
+
+C51 COMPILER V9.60.0.0   MAIN                                                              12/16/2020 14:33:55 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    202    ----
+   CONSTANT SIZE    =     29    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      13
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

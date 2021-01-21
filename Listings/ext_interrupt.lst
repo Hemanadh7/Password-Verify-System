@@ -1,0 +1,50 @@
+C51 COMPILER V9.60.0.0   EXT_INTERRUPT                                                     12/16/2020 14:33:57 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE EXT_INTERRUPT
+OBJECT MODULE PLACED IN .\Objects\ext_interrupt.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE C:\Keil_v5\C51\Examples\ext_interrupt.c OPTIMIZE(8,SPEED) BROWSE DEBUG O
+                    -BJECTEXTEND PRINT(.\Listings\ext_interrupt.lst) TABS(2) OBJECT(.\Objects\ext_interrupt.obj)
+
+line level    source
+
+   1          #include "header.h"
+   2          #include <reg51.h>
+   3          u8 key1,key2,i;
+   4          void INT0_Handler(void) interrupt 0
+   5          {
+   6   1        lcd_cmd(0x1);
+   7   1        lcd_cmd(0x80);
+   8   1        for(i=0;i<4;i++)
+   9   1        {
+  10   2          key1=GetKey();
+  11   2          delay_ms(30);
+  12   2          key2=GetKey();
+  13   2          if(key1==key2)
+  14   2          {
+  15   3            lcd_data(key1);
+  16   3            eeprom_byte_write(0, i, key1);
+  17   3          }
+  18   2        }
+  19   1      }
+  20          
+  21          void en_ext_interrupt(void)
+  22          {
+  23   1        EA=1;
+  24   1        EX0=1;
+  25   1        IT0=1;
+  26   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    126    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
